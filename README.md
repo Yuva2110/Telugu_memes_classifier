@@ -1,4 +1,4 @@
-# 🧠 Multimodal Telugu Meme Classification
+# Multimodal Telugu Meme Classification
 
 This project classifies Telugu memes as **Hate** or **Non-Hate** using a multimodal deep learning model that combines image and text understanding.
 
@@ -12,7 +12,7 @@ This project classifies Telugu memes as **Hate** or **Non-Hate** using a multimo
 
 ---
 
-## 📁 Dataset Format
+## Dataset Format
 
 Your dataset must be in a JSON file (`final_data.json`) with the following structure:
 
@@ -33,7 +33,7 @@ Your dataset must be in a JSON file (`final_data.json`) with the following struc
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Mount Google Drive
 
@@ -80,12 +80,14 @@ All dependencies are automatically installed in the notebook:
 
 - Train/Validation Loss and Accuracy plots
 - Confusion Matrix
+  ![image](https://github.com/user-attachments/assets/faff105b-669f-4186-801f-fc2288c5f326)
+
 - Classification Report (Precision, Recall, F1-score)
 - Test Accuracy: 81.1%
 
 ---
 
-## 🧠 Model Architecture
+## Model Architecture
 
 ```text
    ┌────────────┐       ┌────────────────────┐
@@ -105,7 +107,7 @@ All dependencies are automatically installed in the notebook:
 
 ---
 
-## 🧪 Evaluation
+## Evaluation
 
 - Accuracy
 - Precision, Recall, F1-score
