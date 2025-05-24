@@ -4,7 +4,7 @@
 
 ## Overview
 
-This project addresses the classification of Telugu memes into **Hate**, **Vulgar**, and **Normal** categories using **multimodal deep learning**. It leverages **both image and text information** from memes, focusing on ethical AI for **regional content moderation**.
+This project addresses the classification of Telugu memes into **Vulgar**, and **Normal** categories using **multimodal deep learning**. It leverages **both image and text information** from memes, focusing on ethical AI for **regional content moderation**.
 
 > Telugu is spoken by over 80 million people, yet remains underrepresented in AI research, particularly in content moderation and hate speech detection.
 
@@ -12,7 +12,7 @@ This project addresses the classification of Telugu memes into **Hate**, **Vulga
 
 ## Problem Statement
 
-Design and evaluate a **deep learning-based multimodal classification system** to accurately detect **hate**, **vulgar**, and **benign** content in Telugu memes. The system addresses:
+Design and evaluate a **deep learning-based multimodal classification system** to accurately detect **vulgar**, and **benign** content in Telugu memes. The system addresses:
 
 - Telugu-English code-mixed language
 - Cultural and regional context
@@ -144,7 +144,7 @@ Key sources include:
                      │
               Linear Classifier
                      ▼
-           Output: Hate / Non-Hate
+           Output: Vulgar / Normal
 ```
 
 ## Author
