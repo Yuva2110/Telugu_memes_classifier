@@ -23,6 +23,7 @@ Design and evaluate a **deep learning-based multimodal classification system** t
 ## Objectives
 
 - **Dataset Creation:** Scrape and annotate over 2000 Telugu memes  
+Dataset link: https://drive.google.com/drive/folders/1XU9-GYbYfYtPPbV-qyaKdz4qKrJGkCf_?usp=sharing
 - **Text Analysis:** Use `mBERT` and `IndicBERT` for code-mixed and native Telugu
 - **Image Analysis:** Use `EfficientNetB7`, `ResNet50`, and `ViT` for visual understanding
 - **Multimodal Fusion:** Combine vision and text via `ViT + BERT` and `CLIP + BERT (LoRA)`
