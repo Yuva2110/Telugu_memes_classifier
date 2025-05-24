@@ -129,17 +129,6 @@ Key sources include:
 
 ---
 
-## Outputs
-
-- Train/Validation Loss and Accuracy plots
-- Confusion Matrix
-  ![image](https://github.com/user-attachments/assets/faff105b-669f-4186-801f-fc2288c5f326)
-
-- Classification Report (Precision, Recall, F1-score)
-- Test Accuracy: 81.1%
-
----
-
 ## Model Architecture
 
 ```text
