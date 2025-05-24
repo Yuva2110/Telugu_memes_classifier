@@ -2,11 +2,11 @@ import json
 import os
 
 # Load your JSON file
-with open("/home/yuvakumar/Desktop/Telugu_memes_classifier/Dataset/final_data.json", "r", encoding="utf-8") as f:
+with open("/Telugu_memes_classifier/Dataset/final_data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 # Set your current image directory path
-new_base_path = "/home/yuvakumar/Desktop/Telugu_memes_classifier/Dataset/images"
+new_base_path = "/Telugu_memes_classifier/Dataset/images"
 
 # Update image paths
 for entry in data:
