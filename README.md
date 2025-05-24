@@ -1,78 +1,130 @@
-# Multimodal Telugu Meme Classification
+# Multimodal Classification of Telugu Memes  
 
-This project classifies Telugu memes as **Hate** or **Non-Hate** using a multimodal deep learning model that combines image and text understanding.
+**Detecting Vulgarity and Ethical Concerns in Regional Social Media Content**  
 
-## 🔍 Overview
+## Overview
 
-- **Vision Model:** CLIP (openai/clip-vit-base-patch32)
-- **Text Model:** BERT (bert-base-multilingual-cased)
-- **Fusion Strategy:** Concatenation of image + text embeddings followed by a linear classifier.
-- **Input:** Telugu memes with image, text, and label (0: Non-Hate, 1: Hate)
-- **Output:** Meme classification result with detailed evaluation metrics.
+This project addresses the classification of Telugu memes into **Hate**, **Vulgar**, and **Normal** categories using **multimodal deep learning**. It leverages **both image and text information** from memes, focusing on ethical AI for **regional content moderation**.
+
+> Telugu is spoken by over 80 million people, yet remains underrepresented in AI research, particularly in content moderation and hate speech detection.
 
 ---
 
-## Dataset Format
+## Problem Statement
 
-Your dataset must be in a JSON file (`final_data.json`) with the following structure:
+Design and evaluate a **deep learning-based multimodal classification system** to accurately detect **hate**, **vulgar**, and **benign** content in Telugu memes. The system addresses:
 
-```json
-[
-  {
-    "img": "path/to/image1.jpg",
-    "text": "some telugu or english text",
-    "label": 1
-  },
-  ...
-]
-```
-
-- `img`: Local path to image file
-- `text`: Caption or meme text (in Telugu/English)
-- `label`: 0 (Non-Hate), 1 (Hate)
+- Telugu-English code-mixed language
+- Cultural and regional context
+- Visual-textual alignment in memes
 
 ---
 
-## Setup Instructions
+## Objectives
 
-### 1. Mount Google Drive
-
-Ensure your dataset is in Google Drive (e.g., `/MyDrive/Dataset/final_data.json`).
-
-### 2. Install Required Libraries
-
-All dependencies are automatically installed in the notebook:
-
-```python
-!pip install transformers timm torchvision torch indic-nlp-library langdetect
-```
+- **Dataset Creation:** Scrape and annotate over 2000 Telugu memes  
+- **Text Analysis:** Use `mBERT` and `IndicBERT` for code-mixed and native Telugu
+- **Image Analysis:** Use `EfficientNetB7`, `ResNet50`, and `ViT` for visual understanding
+- **Multimodal Fusion:** Combine vision and text via `ViT + BERT` and `CLIP + BERT (LoRA)`
+- **Evaluation:** Compare models across precision, accuracy, and recall
 
 ---
 
-##  How to Run
+## Dataset
 
-1. **Open the notebook in Google Colab.**
+- Source: Social media platforms (Facebook, Twitter, Instagram)
+- Annotations: Manually labeled as **Hate**, **Vulgar**, or **Normal**
+- Preprocessing:
+  - OCR with Google Vision API
+  - GPT-based cleaning of extracted text
+  - Language detection and tokenization
 
-2. **Mount your Google Drive.**
+### Split:
 
-   ```python
-   from google.colab import drive
-   drive.mount('/content/drive')
-   ```
+| Split      | Count |
+| ---------- | ----- |
+| Train      | ~1400 |
+| Validation | 300   |
+| Test       | 300   |
 
-3. **Set path to your dataset:**
+---
 
-   ```python
-   data_path = "/content/drive/MyDrive/Dataset/final_data.json"
-   ```
+## Models Used
 
-4. **Run all cells sequentially:**
+### Text-Only:
 
-   - Load and split dataset
-   - Create Dataloaders
-   - Build and train multimodal model
-   - Validate and test model
-   - View plots and confusion matrix
+- `mBERT`: Best for code-mixed and informal Telugu
+- `IndicBERT`: Best for Unicode-rich, typed Telugu
+
+### Vision-Only:
+
+- `EfficientNetB7`: Compound scaling architecture
+- `ResNet50`: Deep CNN with residual connections
+
+### Multimodal:
+
+- `ViT + BERT`: Late fusion model using CLS token concat + MLP
+- `CLIP + LoRA + BERT`: Contrastive learning with lightweight fine-tuning
+
+---
+
+## Performance
+
+| Model                | Accuracy  | Vulgar Precision | Normal Precision | Highlights                           |
+| -------------------- | --------- | ---------------- | ---------------- | ------------------------------------ |
+| `mBERT`              | 76.2%     | 0.75             | 0.79             | Handles text but misses image cues   |
+| `IndicBERT`          | 78.1%     | 0.77             | 0.80             | Strong on native Telugu              |
+| `EfficientNetB7`     | 85.0%     | 0.83             | 0.86             | Strong visual understanding          |
+| `ViT + BERT`         | 87.3%     | 0.84             | 0.90             | Fusion boosts accuracy               |
+| `CLIP + LoRA + BERT` | **89.7%** | **0.86**         | **0.92**         | Best performance, efficient training |
+
+---
+
+## 🔬 Model Architecture
+
+- **Text pipeline:** Tokenized text ➝ BERT ➝ CLS ➝ Classifier  
+- **Image pipeline:** Image ➝ ViT or CLIP ➝ CLS ➝ Classifier  
+- **Fusion:** `[CLS_image; CLS_text]` ➝ MLP ➝ Softmax
+
+---
+
+## Training Setup
+
+- Loss Function: Cross-Entropy
+- Optimizer: AdamW
+- Frameworks: PyTorch, Transformers (HuggingFace)
+- Fine-tuning: LoRA for CLIP (low-rank adaptation)
+
+---
+
+## Key Takeaways
+
+- Multimodal approaches outperform unimodal ones
+- LoRA allows efficient adaptation of CLIP to Telugu memes
+- Combining BERT + Vision features bridges the semantic gap
+- Strong potential for real-world moderation tools
+
+---
+
+## Future Work
+
+- Fairness: Bias reduction and ethical model evaluation
+- Multilingual Expansion: Tamil, Hindi, Kannada meme classification
+- Deployment: Browser plugin or moderation bot
+- Humor/Sarcasm Detection: Sentiment fusion module
+- Unified Text Model: Combine IndicBERT and mBERT
+
+---
+
+## References
+
+Key sources include:
+
+- [CLIP: Radford et al., 2021]
+- [mBERT & IndicBERT: Google & AI4Bharat]
+- [ViT: Dosovitskiy et al., 2021]
+- [Kiela et al., Hateful Memes Challenge, 2020]
+- [Davidson et al., 2017 - Hate Speech on Twitter]
 
 ---
 
@@ -105,26 +157,15 @@ All dependencies are automatically installed in the notebook:
            Output: Hate / Non-Hate
 ```
 
----
+## Author
 
-## Evaluation
-
-- Accuracy
-- Precision, Recall, F1-score
-- Confusion Matrix (visual)
-
----
-
-## Notes
-
-- Ensure images in the JSON file are accessible in Colab.
-- Works best with at least 1000 samples per class.
-- Multilingual BERT handles Telugu-English mix well.
+**Irigi Yuva Kumar**  
+M.Tech, CSE Department  
+NITK Surathkal  
+Project Guide: Prof. (Dr.) P. Santhi Thilagam  
 
 ---
 
-## Future Work
+## License
 
-- Use a fusion transformer instead of simple concatenation
-- Add attention between image and text
-- Support other Indian languages
+This project is released under the [MIT License](LICENSE).
